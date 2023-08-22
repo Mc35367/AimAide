@@ -18,7 +18,7 @@ import pyautogui
 import numpy as np
 from rich import print
 from ultralytics import YOLO
-import win32gui, win32ui, win32con
+import win32gui, win32ui, win32con, win32api
 from torchvision.ops import box_convert
 
 from .utils import accurate_timing, parse_config
@@ -322,7 +322,8 @@ class AimAide():
             bboxes, confs, labels = self._infer_func(img)
             detected, conf, x1, y1, x2, y2, w, h, dx, dy = self._perform_target_selection(bboxes, confs, labels, prefer_body=prefer_body)
 
-            if detected and conf > min_conf and np.hypot(dx, dy) < max_dist and not view_only:
+            #win32api for aim on buttonpress   https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+            if detected and win32api.GetAsyncKeyState(0x2D) < 0 and conf > min_conf and np.hypot(dx, dy) < max_dist and not view_only:
                 self._smooth_linear_aim(dx, dy, [x1, y1, x2, y2, w, h], sensitivity, flickieness)
 
 
