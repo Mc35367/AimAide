@@ -94,7 +94,7 @@ with gr.Blocks() as app:
     with gr.Column(visible=True) as options:
         side = gr.Radio(label='Player side', choices=['CT', 'T', 'Deathmatch'], value='CT', info='Deathmatch locks onto CT and T.')
         minconf = gr.Slider(0.2, .99, value=.7, label='Minimum detection confidence', interactive=True, info='Lower value = more detections, more false positives | Higher value = less detections, less false positives')
-        sense = gr.Slider(1, 16, label='Sensitivity Mode', interactive=True, info='Only increase if AimAide behaves erraticaly and fine-tuning in CS:GO is not fixing it.')
+        sense = gr.Slider(1, 16, value=2, label='Sensitivity Mode', interactive=True, info='Only increase if AimAide behaves erraticaly and fine-tuning in CS:GO is not fixing it.')
         flick = gr.Slider(4, 16, value=8, label='Flickieness', interactive=True, info='Lower Value = less flicky | Higher value = more flicky')
         with gr.Row():
             visual = gr.Checkbox(label='Show detector output', info='Opens a seperate window.')
